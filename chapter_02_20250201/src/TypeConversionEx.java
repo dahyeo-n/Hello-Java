@@ -9,7 +9,7 @@ public class TypeConversionEx {
 
     // short type에서 byte type으로 type cast 연산자를 사용해 type conversion 자동 실행
     short numberOfShortType = 32767;
-    byte numberOfByteType = (byte) numberOfShortType;
+    byte numberOfByteType = (byte)numberOfShortType;
     
     // 🔥 중요!!!
     System.out.println();
