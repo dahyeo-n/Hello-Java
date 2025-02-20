@@ -2,12 +2,15 @@ import java.util.Scanner;
 
 public class CalculateMaxNumber {
   public static void main(String[] args) {
+    // Scanner instance 생성
     Scanner scanner = new Scanner(System.in);
 
     System.out.print("Input three numbers >> ");
+    // 3개의 숫자를 입력 받음
     int number1 = scanner.nextInt();
     int number2 = scanner.nextInt();
     int number3 = scanner.nextInt();
+    // Scanner 종료
     scanner.close();
 
     int compareNumbers = number1 > number2 ? number1 : number2;
