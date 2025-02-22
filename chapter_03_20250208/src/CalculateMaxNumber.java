@@ -13,8 +13,8 @@ public class CalculateMaxNumber {
     // Scanner 종료
     scanner.close();
 
-    int compareNumbers = number1 > number2 ? number1 : number2;
-    int maxNumber = compareNumbers > number3 ? compareNumbers : number3;
+    int compareNumber = number1 > number2 ? number1 : number2;
+    int maxNumber = compareNumber > number3 ? compareNumber : number3;
 
     System.out.println();
     System.out.println("The most biggest number is \'" + maxNumber + "\'.");
