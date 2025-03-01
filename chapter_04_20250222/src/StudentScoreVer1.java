@@ -40,7 +40,7 @@ public class StudentScoreVer1 {
 
     // 변수에 합계, 평균, 등급 저장
     int sum = korean + english + math;
-    double average = (korean + english + math) / 3;
+    double average = sum / 3;
     char grade = 'A';
 
     System.out.println();
