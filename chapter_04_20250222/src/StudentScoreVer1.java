@@ -18,7 +18,7 @@ public class StudentScoreVer1 {
       return;
     }
 
-    System.out.print("Input English score (0~100) >> ");
+    System.out.print("Input English score (" + MIN_SCORE + "~" + MAX_SCORE + ") >> ");
     int english = scanner.nextInt();
 
     if (english > MAX_SCORE || english < MIN_SCORE) {
@@ -40,7 +40,7 @@ public class StudentScoreVer1 {
 
     // 변수에 합계, 평균, 등급 저장
     int sum = korean + english + math;
-    double average = sum / 3;
+    double average = (double) sum / 3;
     char grade = 'A';
 
     System.out.println();
@@ -53,23 +53,20 @@ public class StudentScoreVer1 {
       case 10:
       case 9:
         grade = 'A';
-        System.out.println("Your rank is \'" + grade + "\' grade.");
         break;
       case 8:
         grade = 'B';
-        System.out.println("Your rank is \'" + grade + "\' grade.");
         break;
       case 7:
         grade = 'C';
-        System.out.println("Your rank is \'" + grade + "\' grade.");
         break;
       case 6:
         grade = 'D';
-        System.out.println("Your rank is \'" + grade + " \' grade.");
         break;
       default:
         grade = 'F';
-        System.out.println("Your rank is \'" + grade + "\' grade.");
     }
+
+    System.out.println("Your rank is \'" + grade + "\' grade.");
   }
 }
