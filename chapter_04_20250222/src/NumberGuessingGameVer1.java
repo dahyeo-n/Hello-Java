@@ -13,7 +13,7 @@ public class NumberGuessingGameVer1 {
     int difficulty = 0;
 
     while (true) {
-      System.out.print("Input difficulty (easy: 1, normal: 2, hard: 3) >> ");
+      System.out.print("Input difficulty (easy: " + EASY + ", normal: " + NORMAL + ", hard: " + HARD + ") >> ");
       difficulty = scanner.nextInt();
 
       if (difficulty >= EASY && difficulty <= HARD)
