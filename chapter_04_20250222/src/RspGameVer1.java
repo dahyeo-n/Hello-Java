@@ -41,13 +41,13 @@ public class RspGameVer1 {
 
     switch (computerItem) {
       case ROCK:
-        System.out.println("The player choosed \"rock\".");
+        System.out.println("The computer choosed \"rock\".");
         break;
       case SCISSORS:
-        System.out.println("The player choosed \"scissors\".");
+        System.out.println("The computer choosed \"scissors\".");
         break;
       case PAPER:
-        System.out.println("The player choosed \"paper\".");
+        System.out.println("The computer choosed \"paper\".");
         break;
     }
 
