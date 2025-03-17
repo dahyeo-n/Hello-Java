@@ -22,7 +22,20 @@ public class NumberGuessingGameVer1 {
       System.out.println("You input a number that does not correspond to easy, normal, hard.");
     }
 
-    int maxRange = (difficulty == EASY) ? 20 : (difficulty == NORMAL) ? 30 : 50;
+    int maxRange = 0;
+
+    switch (difficulty) {
+      case EASY:
+        maxRange = 20;
+        break;
+      case NORMAL:
+        maxRange = 30;
+        break;
+      case HARD:
+        maxRange = 50;
+        break;
+    }
+
     int randomNumber = random.nextInt(1, maxRange + 1);
 
     int round = 1;
@@ -42,23 +55,23 @@ public class NumberGuessingGameVer1 {
         System.out.println("You input wrong number.");
       }
 
-      if (guessedNumber < randomNumber) {
-        System.out.println("\nUp!!");
-      } else if (guessedNumber > randomNumber) {
-        System.out.println("\nDown!!");
-      } else {
+      if (guessedNumber == randomNumber) {
         System.out.println("\nCongratulation!! You found a game number!!");
         break;
+      } else if (guessedNumber < randomNumber) {
+        System.out.println("\nUp!!");
+      } else {
+        System.out.println("\nDown!!");
       }
 
       round++;
     }
 
+    scanner.close();
+
     System.out.println("\n--- Game Result ---\n");
     System.out.println("Game number: " + randomNumber);
     System.out.println("You found the game number in \'" + round + "\' rounds.");
-
-    scanner.close();
   }
 }
 
