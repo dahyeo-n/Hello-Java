@@ -31,27 +31,47 @@ public class RspGameVer2 {
 
       int computerItem = random.nextInt(ROCK, PAPER + 1);
 
-      String ItemSelectedByPlayer = (playerItem == ROCK) ? "rock" : (playerItem == SCISSORS) ? "scissors" : "paper";
-      String ItemSelectedByComputer = (computerItem == ROCK) ? "rock"
-          : (computerItem == SCISSORS) ? "scissors" : "paper";
-
-      System.out.println("\nThe player choosed \"" + ItemSelectedByPlayer + "\".");
-      System.out.println("The computer choosed \"" + ItemSelectedByComputer + "\".");
       System.out.println();
 
-      if ((playerItem == ROCK && computerItem == SCISSORS)
+      switch (playerItem) {
+        case ROCK:
+          System.out.println("The player choosed \"rock\".");
+          break;
+        case SCISSORS:
+          System.out.println("The player choosed \"scissors\".");
+          break;
+        case PAPER:
+          System.out.println("The player choosed \"paper\".");
+          break;
+      }
+
+      switch (computerItem) {
+        case ROCK:
+          System.out.println("The computer choosed \"rock\".");
+          break;
+        case SCISSORS:
+          System.out.println("The computer choosed \"scissors\".");
+          break;
+        case PAPER:
+          System.out.println("The computer choosed \"paper\".");
+          break;
+      }
+
+      System.out.println();
+
+      if (playerItem == computerItem) {
+        System.out.println("Draw.");
+      } else if ((playerItem == ROCK && computerItem == SCISSORS)
           || (playerItem == SCISSORS && computerItem == PAPER)
           || playerItem == PAPER && computerItem == ROCK) {
         System.out.println("You win!!");
         numberOfWins++;
-      } else if (playerItem == computerItem) {
-        System.out.println("Draw.");
       } else {
         System.out.println("You lose...");
       }
 
       // 첫 번째 판부터 현재 판까지의 승률 계산
-      int odds = (numberOfWins == 0) ? 0 : (numberOfWins * 100) / round;
+      int odds = (int) ((double) numberOfWins / round * 100);
       System.out.println("Your win rate is \'" + odds + "%\'.");
 
       final String KEEP_PROGRESSING = "yes";
