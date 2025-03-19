@@ -2,58 +2,26 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGameVer1 {
+  public static final Scanner scanner = new Scanner(System.in);
+
+  public static final int EASY = 1;
+  public static final int NORMAL = EASY + 1;
+  public static final int HARD = NORMAL + 1;
+
   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
     Random random = new Random();
 
-    final int EASY = 1;
-    final int NORMAL = EASY + 1;
-    final int HARD = NORMAL + 1;
-
-    int difficulty = 0;
-
-    while (true) {
-      System.out.print("Input difficulty (easy: " + EASY + ", normal: " + NORMAL + ", hard: " + HARD + ") >> ");
-      difficulty = scanner.nextInt();
-
-      if (difficulty >= EASY && difficulty <= HARD)
-        break;
-
-      System.out.println("You input a number that does not correspond to easy, normal, hard.");
-    }
-
     int maxRange = 0;
-
-    switch (difficulty) {
-      case EASY:
-        maxRange = 20;
-        break;
-      case NORMAL:
-        maxRange = 30;
-        break;
-      case HARD:
-        maxRange = 50;
-        break;
-    }
-
-    int randomNumber = random.nextInt(1, maxRange + 1);
-
     int round = 1;
-    int guessedNumber = 0;
+
+    int difficulty = inputDifficulty();
+    maxRange = calculateMaxRange(difficulty, maxRange);
+    int randomNumber = random.nextInt(1, maxRange + 1);
 
     while (true) {
       System.out.println("\n--- Round " + round + " ---\n");
 
-      while (true) {
-        System.out.print("Input number (1~" + maxRange + ") >> ");
-        guessedNumber = scanner.nextInt();
-
-        if (guessedNumber >= 1 && guessedNumber <= maxRange) {
-          break;
-        }
-
-        System.out.println("You input wrong number.");
-      }
+      int guessedNumber = inputGuessedNumber(maxRange);
 
       if (guessedNumber == randomNumber) {
         System.out.println("\nCongratulation!! You found a game number!!");
@@ -68,7 +36,79 @@ public class NumberGuessingGameVer1 {
     }
 
     scanner.close();
+    printGameResult(randomNumber, round);
+  }
 
+  /**
+   * <p>난이도 숫자를 입력 받고, 해당 숫자를 반환</p>
+   * @return 입력된 난이도 숫자
+   */
+  public static int inputDifficulty() {
+    int difficulty = 0;
+
+    while (true) {
+      System.out.print("Input difficulty (easy: " + EASY + ", normal: " + NORMAL + ", hard: " + HARD + ") >> ");
+      difficulty = scanner.nextInt();
+
+      if (difficulty >= EASY && difficulty <= HARD)
+        break;
+
+      System.out.println("You input a number that does not correspond to easy, normal, hard.");
+    }
+
+    return difficulty;
+  }
+
+  /**
+   * <p>난이도에 따라 최대 범위를 산정하고, 최대 범위 반환</p>
+   * @param difficulty 난이도
+   * @param maxRange 최대 범위의 초기값
+   * @return 최대 범위
+   */
+  public static int calculateMaxRange(int difficulty, int maxRange) {
+    switch (difficulty) {
+      case EASY:
+        maxRange = 20;
+        break;
+      case NORMAL:
+        maxRange = 30;
+        break;
+      case HARD:
+        maxRange = 50;
+        break;
+    }
+
+    return maxRange;
+  }
+
+  /**
+   * <p>숫자를 입력 받아, 입력 받은 숫자를 반환</p>
+   * @param maxRange 입력 받을 수 있는 수의 최대 범위
+   * @return 입력 받은 숫자
+   */
+  public static int inputGuessedNumber(int maxRange) {
+    int guessedNumber = 0;
+
+    while (true) {
+      System.out.print("Input number (1~" + maxRange + ") >> ");
+      guessedNumber = scanner.nextInt();
+
+      if (guessedNumber >= 1 && guessedNumber <= maxRange) {
+        break;
+      }
+
+      System.out.println("You input wrong number.");
+    }
+
+    return guessedNumber;
+  }
+
+  /**
+   * <p>게임 결과 출력</p>
+   * @param randomNumber 맞힌 숫자
+   * @param round 몇 라운드 만에 맞혔는지
+   */
+  public static void printGameResult(int randomNumber, int round) {
     System.out.println("\n--- Game Result ---\n");
     System.out.println("Game number: " + randomNumber);
     System.out.println("You found the game number in \'" + round + "\' rounds.");
