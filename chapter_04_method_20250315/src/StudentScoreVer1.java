@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class StudentScoreVer1 {
   public static Scanner scanner = new Scanner(System.in);
 
-  // 각각 점수는 0점 이상 100점 이하이며 잘못 입력 시 오류 문구 출력 후, 강제 종료
   public static final int MAX_SCORE = 100;
   public static final int MIN_SCORE = 0;
 
@@ -20,7 +19,7 @@ public class StudentScoreVer1 {
     System.out.print("Input Math score (" + MIN_SCORE + "~" + MAX_SCORE + ") >> ");
     int math = scanner.nextInt();
     printErrorMessage(math);
-
+    
     scanner.close();
 
     // 변수에 합계, 평균, 등급 저장
@@ -35,14 +34,14 @@ public class StudentScoreVer1 {
   }
 
   /**
-   * <p>최소 점수에서 최대 점수 사이의 점수가 아닌 잘못된 점수일 경우 에러 메시지 출력</p>
-   * @param score 과목 점수
+   * <p>최소 점수에서 최대 점수 사이의 점수가 아닌 잘못된 점수일 경우, 에러 메시지 출력</p>
+   * @param score 점수
    */
   public static void printErrorMessage(int score) {
     if (score > MAX_SCORE || score < MIN_SCORE) {
-      System.out.println("You input a number out of range.");
       scanner.close();
-      return;
+      System.out.println("You input a number out of range.");
+      System.exit(1);
     }
   }
 
@@ -57,9 +56,9 @@ public class StudentScoreVer1 {
   }
 
   /**
-   * <p>평균에 따른 등급을 계산하여 반환</p>
+   * <p>점수의 평균에 따른 등급을 계산하여 반환</p>
    * @param average 점수 평균
-   * @param grade 등급 초기값: 'A'
+   * @param grade 등급 초기값('A')
    * @return 평균에 따른 등급
    */
   public static char calculateGrade(double average, char grade) {
