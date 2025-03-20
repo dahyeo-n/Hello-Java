@@ -9,31 +9,14 @@ public class NumberGuessingGameVer1 {
   public static final int HARD = NORMAL + 1;
 
   public static void main(String[] args) {
-    Random random = new Random();
-
     int maxRange = 0;
     int round = 1;
 
     int difficulty = inputDifficulty();
     maxRange = calculateMaxRange(difficulty, maxRange);
-    int randomNumber = random.nextInt(1, maxRange + 1);
 
-    while (true) {
-      System.out.println("\n--- Round " + round + " ---\n");
-
-      int guessedNumber = inputGuessedNumber(maxRange);
-
-      if (guessedNumber == randomNumber) {
-        System.out.println("\nCongratulation!! You found a game number!!");
-        break;
-      } else if (guessedNumber < randomNumber) {
-        System.out.println("\nUp!!");
-      } else {
-        System.out.println("\nDown!!");
-      }
-
-      round++;
-    }
+    int randomNumber = RandomNumber(maxRange);
+    round = printRoundAndGuessedResult(round, maxRange, randomNumber);
 
     scanner.close();
     printGameResult(randomNumber, round);
@@ -63,7 +46,7 @@ public class NumberGuessingGameVer1 {
    * <p>난이도에 따라 최대 범위를 산정하고, 최대 범위 반환</p>
    * @param difficulty 난이도
    * @param maxRange 최대 범위의 초기값
-   * @return 최대 범위
+   * @return 난이도에 따른 최대 범위
    */
   public static int calculateMaxRange(int difficulty, int maxRange) {
     switch (difficulty) {
@@ -79,6 +62,44 @@ public class NumberGuessingGameVer1 {
     }
 
     return maxRange;
+  }
+
+  /**
+   * <p>최대 범위 내에서 숫자를 랜덤으로 생성 후, 반환</p>
+   * @param maxRange 랜덤 숫자의 최대 범위
+   * @return 랜덤 숫자
+   */
+  public static int RandomNumber(int maxRange) {
+    Random random = new Random();
+    return random.nextInt(1, maxRange + 1);
+  }
+
+  /**
+   * <p>round 횟수와 추측한 숫자에 따른 결과를 출력</p>
+   * @param round 라운드 횟수
+   * @param maxRange 정답인 숫자의 최대 범위
+   * @param randomNumber 정답인 숫자
+   * @return 라운드 횟수
+   */
+  public static int printRoundAndGuessedResult(int round, int maxRange, int randomNumber) {
+    while (true) {
+      System.out.println("\n--- Round " + round + " ---\n");
+
+      int guessedNumber = inputGuessedNumber(maxRange);
+
+      if (guessedNumber == randomNumber) {
+        System.out.println("\nCongratulation!! You found a game number!!");
+        break;
+      } else if (guessedNumber < randomNumber) {
+        System.out.println("\nUp!!");
+      } else {
+        System.out.println("\nDown!!");
+      }
+
+      round++;
+    }
+
+    return round;
   }
 
   /**
