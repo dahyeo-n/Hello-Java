@@ -12,15 +12,13 @@ public class RspGameVer1 {
   public static void main(String[] args) {
     int playerItem = inputPlayerItem();
     scanner.close();
+
     printErrorMessage(playerItem);
 
     // RandomComputerItem: 컴퓨터 아이템을 랜덤한 숫자로 설정
     int computerItem = RandomNumber();
 
-    System.out.println();
     printItems(playerItem, computerItem);
-
-    System.out.println();
     printGameResult(playerItem, computerItem);
   }
 
@@ -61,6 +59,8 @@ public class RspGameVer1 {
    * @param computerItem 컴퓨터의 아이템
    */
   public static void printItems(int playerItem, int computerItem) {
+    System.out.println();
+
     switch (playerItem) {
       case ROCK:
         System.out.println("The player choosed \"rock\".");
@@ -92,12 +92,14 @@ public class RspGameVer1 {
    * @param computerItem 컴퓨터의 아이템
    */
   public static void printGameResult(int playerItem, int computerItem) {
-    if ((playerItem == ROCK && computerItem == SCISSORS)
+    System.out.println();
+
+    if (playerItem == computerItem) {
+      System.out.println("Draw.");
+    } else if ((playerItem == ROCK && computerItem == SCISSORS)
         || (playerItem == SCISSORS && computerItem == PAPER)
         || playerItem == PAPER && computerItem == ROCK) {
       System.out.println("You win!!");
-    } else if (playerItem == computerItem) {
-      System.out.println("Draw.");
     } else {
       System.out.println("You lose...");
     }
