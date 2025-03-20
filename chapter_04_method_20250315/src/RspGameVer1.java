@@ -12,13 +12,11 @@ public class RspGameVer1 {
   public static void main(String[] args) {
     int playerItem = inputPlayerItem();
     scanner.close();
-
     printErrorMessage(playerItem);
 
-    // RandomComputerItem: 컴퓨터 아이템을 랜덤한 숫자로 설정
     int computerItem = RandomNumber();
-
     printItems(playerItem, computerItem);
+
     printGameResult(playerItem, computerItem);
   }
 
