@@ -61,7 +61,7 @@ public class RspGameVer2 {
 
   /**
    * <p>플레이어와 컴퓨터가 가위/바위/보 중에 어떤 걸 냈는지 출력</p>
-   * @param playerItem 플레이어가 선택한 아이템
+   * @param playerItem 플레이어의 아이템
    * @param computerItem 컴퓨터의 아이템
    */
   public static void printItems(int playerItem, int computerItem) {
@@ -117,7 +117,7 @@ public class RspGameVer2 {
   }
 
   /**
-   * <p>첫 번째 판부터 현재 판까지의 승률 계산</p>
+   * <p>첫 번째 판부터 현재 판까지의 승률 계산 후, 출력</p>
    * @param numberOfWins 이긴 횟수
    * @param round 진행한 라운드 수
    */
