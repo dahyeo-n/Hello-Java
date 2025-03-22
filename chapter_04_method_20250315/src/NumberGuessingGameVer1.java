@@ -9,20 +9,25 @@ public class NumberGuessingGameVer1 {
   public static final int HARD = NORMAL + 1;
 
   public static void main(String[] args) {
-    int maxRange = 0;
-    int round = 1;
+    startNumberGuessingGame();
+  }
 
+  /**
+   * <p>숫자 맞히기 게임에 필요한 메소드의 집합</p>
+   */
+  public static void startNumberGuessingGame() {
     int difficulty = inputDifficulty();
-    maxRange = calculateMaxRange(difficulty, maxRange);
+    int maxRange = calculateMaxRange(difficulty);
 
-    int randomNumber = RandomNumber(maxRange);
-    round = printRoundAndGuessedResult(round, maxRange, randomNumber);
+    int randomNumber = randomNumber(maxRange);
 
+    int round = playGame(maxRange, randomNumber);
     printGameResult(randomNumber, round);
   }
 
   /**
-   * <p>난이도 숫자를 입력 받고, 해당 숫자를 반환</p>
+   * <p>easy, normal, hard 난이도에 따른 숫자를 입력 받고, 해당 숫자를 반환</p>
+   * <p>난이도 범위 외 숫자 입력 시 오류 문구 출력 ("You input a number that does not correspond to easy, normal, hard.")</p>
    * @return 입력된 난이도 숫자
    */
   public static int inputDifficulty() {
@@ -44,10 +49,11 @@ public class NumberGuessingGameVer1 {
   /**
    * <p>난이도에 따라 최대 범위를 산정하고, 최대 범위 반환</p>
    * @param difficulty 난이도
-   * @param maxRange 최대 범위의 초기값
    * @return 난이도에 따른 최대 범위
    */
-  public static int calculateMaxRange(int difficulty, int maxRange) {
+  public static int calculateMaxRange(int difficulty) {
+    int maxRange = 0;
+
     switch (difficulty) {
       case EASY:
         maxRange = 20;
@@ -68,13 +74,14 @@ public class NumberGuessingGameVer1 {
    * @param maxRange 랜덤 숫자의 최대 범위
    * @return 랜덤 숫자
    */
-  public static int RandomNumber(int maxRange) {
+  public static int randomNumber(int maxRange) {
     Random random = new Random();
     return random.nextInt(1, maxRange + 1);
   }
 
   /**
-   * <p>숫자를 입력 받아, 입력 받은 숫자를 반환</p>
+   * <p>1부터 최대 범위 내의 숫자를 입력 받아, 입력 받은 숫자를 반환</p>
+   * <p>해당 범위 외 숫자 입력 시, 오류 문구 출력 ("You input wrong number.")</p>
    * @param maxRange 입력 받을 수 있는 수의 최대 범위
    * @return 입력 받은 숫자
    */
@@ -97,22 +104,27 @@ public class NumberGuessingGameVer1 {
 
   /**
    * <p>round 횟수와 추측한 숫자에 따른 결과를 출력</p>
-   * @param round 라운드 횟수
+   * <p>1. round 횟수 출력</p>
+   * <p>2. 정답일 경우 게임 종료 및 축하 문구 출력 ("Congratulation!! You found a game number!!")</p>
+   * <p>3. 추측한 숫자가 정답 숫자보다 작을 경우: round 수 증가 & "Up!!" 문구 출력</p>
+   * <p>4. 추측한 숫자가 정답 숫자보다 클 경우: round 수 증가 & "Down!!" 문구 출력</p>
    * @param maxRange 정답인 숫자의 최대 범위
-   * @param randomNumber 정답인 숫자
+   * @param correctNumber 정답인 숫자
    * @return 라운드 횟수
    */
-  public static int printRoundAndGuessedResult(int round, int maxRange, int randomNumber) {
+  public static int playGame(int maxRange, int correctNumber) {
+    int round = 1;
+
     while (true) {
       System.out.println("\n--- Round " + round + " ---\n");
 
       int guessedNumber = inputGuessedNumber(maxRange);
 
-      if (guessedNumber == randomNumber) {
+      if (guessedNumber == correctNumber) {
         scanner.close();
         System.out.println("\nCongratulation!! You found a game number!!");
         break;
-      } else if (guessedNumber < randomNumber) {
+      } else if (guessedNumber < correctNumber) {
         System.out.println("\nUp!!");
       } else {
         System.out.println("\nDown!!");
@@ -126,12 +138,15 @@ public class NumberGuessingGameVer1 {
 
   /**
    * <p>게임 결과 출력</p>
+   * <p>"--- Game Result ---"</p>
+   * <p>"Game number: " + correctNumber</p>
+   * <p>"You found the game number in \'" + round + "\' rounds."</p>
    * @param randomNumber 맞힌 숫자
    * @param round 몇 라운드 만에 맞혔는지
    */
-  public static void printGameResult(int randomNumber, int round) {
+  public static void printGameResult(int correctNumber, int round) {
     System.out.println("\n--- Game Result ---\n");
-    System.out.println("Game number: " + randomNumber);
+    System.out.println("Game number: " + correctNumber);
     System.out.println("You found the game number in \'" + round + "\' rounds.");
   }
 }
