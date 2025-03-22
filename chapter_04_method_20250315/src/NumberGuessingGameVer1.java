@@ -138,9 +138,10 @@ public class NumberGuessingGameVer1 {
 
   /**
    * <p>게임 결과 출력</p>
-   * <p>"--- Game Result ---"</p>
-   * <p>"Game number: " + correctNumber</p>
-   * <p>"You found the game number in \'" + round + "\' rounds."</p>
+   * <p>예시 ⬇️</p>
+   * <p>1. "--- Game Result ---"</p>
+   * <p>2. "Game number: 24"</p>
+   * <p>3. "You found the game number in '5' rounds."</p>
    * @param randomNumber 맞힌 숫자
    * @param round 몇 라운드 만에 맞혔는지
    */
