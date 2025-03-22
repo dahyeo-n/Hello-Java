@@ -24,7 +24,7 @@ public class StudentScoreVer1 {
   }
 
   /**
-   * <p>과목명에 따른 점수를 입력 받고, 올바르게 입력했는지 검사 후 반환</p>
+   * <p>과목명에 따른 점수를 입력 받고, 올바르게 입력했는지 검사 후 입력 받은 점수 반환</p>
    * @param subjectName 과목명
    * @return 입력 받은 점수
    */
