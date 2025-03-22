@@ -75,6 +75,28 @@ public class NumberGuessingGameVer1 {
   }
 
   /**
+   * <p>숫자를 입력 받아, 입력 받은 숫자를 반환</p>
+   * @param maxRange 입력 받을 수 있는 수의 최대 범위
+   * @return 입력 받은 숫자
+   */
+  public static int inputGuessedNumber(int maxRange) {
+    int guessedNumber = 0;
+
+    while (true) {
+      System.out.print("Input number (1~" + maxRange + ") >> ");
+      guessedNumber = scanner.nextInt();
+
+      if (guessedNumber >= 1 && guessedNumber <= maxRange) {
+        break;
+      }
+
+      System.out.println("You input wrong number.");
+    }
+
+    return guessedNumber;
+  }
+
+  /**
    * <p>round 횟수와 추측한 숫자에 따른 결과를 출력</p>
    * @param round 라운드 횟수
    * @param maxRange 정답인 숫자의 최대 범위
@@ -100,28 +122,6 @@ public class NumberGuessingGameVer1 {
     }
 
     return round;
-  }
-
-  /**
-   * <p>숫자를 입력 받아, 입력 받은 숫자를 반환</p>
-   * @param maxRange 입력 받을 수 있는 수의 최대 범위
-   * @return 입력 받은 숫자
-   */
-  public static int inputGuessedNumber(int maxRange) {
-    int guessedNumber = 0;
-
-    while (true) {
-      System.out.print("Input number (1~" + maxRange + ") >> ");
-      guessedNumber = scanner.nextInt();
-
-      if (guessedNumber >= 1 && guessedNumber <= maxRange) {
-        break;
-      }
-
-      System.out.println("You input wrong number.");
-    }
-
-    return guessedNumber;
   }
 
   /**
