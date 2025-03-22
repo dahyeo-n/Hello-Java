@@ -19,7 +19,7 @@ public class StudentScoreVer1 {
     System.out.print("Input Math score (" + MIN_SCORE + "~" + MAX_SCORE + ") >> ");
     int math = scanner.nextInt();
     printErrorMessage(math);
-    
+
     scanner.close();
 
     // 변수에 합계, 평균, 등급 저장
