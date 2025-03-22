@@ -18,7 +18,6 @@ public class NumberGuessingGameVer1 {
     int randomNumber = RandomNumber(maxRange);
     round = printRoundAndGuessedResult(round, maxRange, randomNumber);
 
-    scanner.close();
     printGameResult(randomNumber, round);
   }
 
@@ -110,6 +109,7 @@ public class NumberGuessingGameVer1 {
       int guessedNumber = inputGuessedNumber(maxRange);
 
       if (guessedNumber == randomNumber) {
+        scanner.close();
         System.out.println("\nCongratulation!! You found a game number!!");
         break;
       } else if (guessedNumber < randomNumber) {
