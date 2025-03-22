@@ -56,7 +56,7 @@ public class RspGameVer1 {
   }
 
   /**
-   * <p>범위 내의 랜덤한 숫자 생성 후, 반환</p>
+   * <p>범위(1~3) 내의 랜덤한 숫자 생성 후, 반환</p>
    * @return 랜덤 숫자
    */
   public static int randomNumber() {
@@ -85,6 +85,9 @@ public class RspGameVer1 {
 
   /**
    * <p>가위바위보 게임 결과 출력</p>
+   * <p>1. User가 비겼을 경우: "Draw."</p>
+   * <p>2. User가 이겼을 경우: "You win!!"</p>
+   * <p>3. User가 졌을 경우: "You lose..."</p>
    * @param playerItem 플레이어의 아이템
    * @param computerItem 컴퓨터의 아이템
    */
