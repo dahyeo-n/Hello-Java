@@ -5,6 +5,10 @@ public class StudentScoreVer1 {
 
   // 학생의 국어, 영어, 수학 점수를 입력 받아 합계, 평균, 등급 출력
   public static void main(String[] args) {
+    startStudentScore();
+  }
+
+  public static void startStudentScore() {
     int korean = getScore("Korean");
     int english = getScore("English");
     int math = getScore("Math");
