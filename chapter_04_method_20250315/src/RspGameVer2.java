@@ -18,8 +18,8 @@ public class RspGameVer2 {
 
       int playerItem = inputPlayerItem();
       int computerItem = RandomNumber();
-
       printItems(playerItem, computerItem);
+
       numberOfWins = printGameResult(playerItem, computerItem, numberOfWins);
       printOdds(numberOfWins, round);
 
