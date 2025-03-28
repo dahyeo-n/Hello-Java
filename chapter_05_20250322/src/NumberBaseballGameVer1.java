@@ -14,9 +14,24 @@ public class NumberBaseballGameVer1 {
   public static void startGame() {
     int[] gameNumber = getGameNumber();
     int convertedGameNumber = convertArrayToInt(gameNumber);
+
+    System.out.println("\n🧞 Correct Number: " + convertedGameNumber + "\n");
+    printTutorial();
+
     int round = playGame(gameNumber);
 
     printGameResult(convertedGameNumber, round);
+  }
+
+  public static void printTutorial() {
+    System.out.println("< Game Tutorial >");
+    System.out.println("1. Enter a 4-digit number with no duplicates.\n");
+    System.out.println("2. Game Results");
+    System.out.println("2-1. [Ball] Numbers exist but different locations");
+    System.out.println("2-2. [Strike] Same number in the same location");
+    System.out.println("2-3. [Out] All numbers and locations do not match");
+    System.out.println("2-4. [🥳 Congratulations!] 4 Strike");
+    System.out.println("\nAre you ready? 😆 Have fun playing!\n\n");
   }
 
   /*
@@ -111,7 +126,7 @@ public class NumberBaseballGameVer1 {
       return false;
     }
 
-    boolean[] digits = new boolean[9]; // 1~9까지 숫자 등장 여부 체크
+    boolean[] digits = new boolean[10];
     int temp = number;
 
     while (temp > 0) {
@@ -128,7 +143,7 @@ public class NumberBaseballGameVer1 {
   }
 
   /*
-   * (4) playGame: player 숫자와 게임 숫자와 비교한 결과값을 주어진 조건대로 출력
+   * (4) playGame: player 숫자와 정답 숫자를 비교한 결과값을 주어진 조건대로 출력
    * 
    * ⬇️ Example
    * correctNumber: [1, 3, 5, 7]
@@ -144,25 +159,23 @@ public class NumberBaseballGameVer1 {
    * 
    * if문 사용
    * (1) 모든 숫자 불일치 → "😔 Out! There is no number or position of the number you guessed."
-   * (2) 숫자는 있지만 위치 다름 → ball++
-   * (3) 같은 위치에 같은 숫자 → strike++
-   * (4) out이 아닐 경우, 해당 문구 출력 ("😎 1strike 2ball!")
+   * (2) 같은 위치에 같은 숫자 → strike++
+   * (3) 숫자는 있지만 위치 다름 → ball++
+   * *** 😈 정답이 아닐 경우, round++
    * 
-   * 예시1: [game number: 3529] 1784 → Out!
-   * 예시2: [game number: 3529] 1592 → 1 Strike 2 Ball!
+   * 예시1: [game number: 3529] 1784 → "Out!"
+   * 예시2: [game number: 3529] 1592 → "😎 1 Strike 2 Ball!"
    * 
-   * 🌟 4 strike 완료 시 게임 종료
-   * 출력: System.out.println("🥳 Congratulations! You guessed the correct number.");
-   * 
-   * 😈 정답이 아닐 경우, round++
+   * (4) 4 Strike 완료 시 게임 종료 및 축하 문구 출력 ("🥳 Congratulations!");
   */
 
   /**
-   * <p></p>
+   * <p>Player 숫자와 정답 숫자를 비교하여 결과에 따라 다음과 같이 출력</p>
    * <p>⬇️ 출력 예시</p>
-   * <p>1. "😔 Out! There is no number or position of the number you guessed."</p>
-   * <p>2. "😎 1strike 2ball!"</p>
-   * <p>3. "🥳 Congratulations! You guessed the correct number."</p>
+   * <p>1. 모든 숫자 불일치: "😔 Out! There is no number or position of the number you guessed."</p>
+   * <p>2. 같은 위치에 같은 숫자: "😎 1 Strike!"</p>
+   * <p>3. 숫자는 있지만 위치 다름: "😎 2 Ball!"</p>
+   * <p>4. 정답을 맞힌 경우: "🥳 Congratulations!"</p>
    * @param correctNumber 정답인 숫자
    * @param playerNumber 플레이어가 추측한 숫자
    * @return 라운드 수
@@ -193,7 +206,7 @@ public class NumberBaseballGameVer1 {
       }
 
       if (strike == 4 && ball == 0) {
-        System.out.println("\n🎉 Congratulations! You guessed the correct number in " + round + " rounds.\n");
+        System.out.println("\n\n🎉 Congratulations!\n");
         break;
       } else if (strike == 0 && ball == 0) {
         System.out.println("😔 Out! There is no matching number.\n");
