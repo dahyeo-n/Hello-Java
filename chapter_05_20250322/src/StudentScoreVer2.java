@@ -10,7 +10,7 @@ public class StudentScoreVer2 {
 
   /**
    * <p>점수의 합계, 평균, 등급 출력에 필요한 메소드의 집합</p>
-   */
+  */
   public static void startStudentScore() {
     int subjectLength = getSubjectLength();
     int[] scores = getSubjectInfo(subjectLength);
@@ -31,13 +31,13 @@ public class StudentScoreVer2 {
    * NOTE: 과목을 몇 개 입력 받을 것인지를 먼저 입력 받아서 그것의 length대로 배열(scores) 생성
    * NOTE: 3개 이상 10개 이하가 아닐 경우, 오류 메시지 출력 후 재입력 받기
    * ⇒ validateScoreLength: 올바른 범위가 아닐 시, 오류 문구 출력 및 재입력 받음 (parameter: scoreLength)
-   */
+  */
 
   /**
    * <p>과목의 개수를 입력받고, 올바르게 입력했는지 검사 후 입력 받은 개수 반환</p>
    * <p>⚠️ 과목의 개수가 3개 이상 10개 이하가 아닐 경우, 오류 메시지 출력 ("You entered an incorrect range. Please enter again.")</p>
    * @return 입력 받은 과목의 개수
-   */
+  */
   public static int getSubjectLength() {
     int subjectLength = 0;
 
@@ -61,19 +61,20 @@ public class StudentScoreVer2 {
    * ⇒ getSubjectInfo:scoreLength만큼 반복문을 돌려서 '과목명-점수'를 짝지어서 입력 받음
    * NOTE: 만약, 입력 타입이 안 맞을 경우엔 오류 문구 출력 후 재입력
    * ⇒ validateScoreType: 입력 타입이 올바르지 않으면 오류 문구 출력 및 재입력
-   */
+  */
 
   /*
    * 각 점수는 0점 이상 100점 이하이며 잘못 입력 시 오류 문구 출력 후 재입력
    * NOTE: 0점 이상 100점 이하가 아닐 경우, 오류 문구 출력 후 재입력
    * ⇒ validateScore: 입력한 점수의 범위가 올바르지 않으면 오류 문구 출력 및 재입력
-   */
+  */
 
   /**
-   * <p></p>
-   * @param subjectLength
-   * @return
-   */
+   * <p>과목명과 점수를 입력 받아서 점수 배열을 반환</p>
+   * <p>점수를 올바른 범위 내에서 입력하지 않았을 시, 오류 문구 출력 후 재입력 받음 ("You input a number out of range. Please enter again.")</p>
+   * @param subjectLength 입력 받을 점수의 개수
+   * @return 입력 받은 점수의 배열
+  */
   public static int[] getSubjectInfo(int subjectLength) {
     int[] scores = new int[subjectLength];
 
@@ -97,6 +98,11 @@ public class StudentScoreVer2 {
     return scores;
   }
 
+  /**
+   * <p>점수들의 합계를 계산하여 반환</p>
+   * @param scores 점수들
+   * @return 계산된 합계
+  */
   public static int calculateSum(int[] scores) {
     int sum = 0;
 
@@ -116,7 +122,7 @@ public class StudentScoreVer2 {
    * <p>5. F: 0~59점</p>
    * @param average 점수 평균
    * @return 평균에 따른 등급
-   */
+  */
   public static char calculateGrade(double average) {
     int averageOfIntType = (int) average;
 
@@ -139,7 +145,7 @@ public class StudentScoreVer2 {
    * @param sum 합계 점수
    * @param average 평균 점수
    * @param grade 등급
-   */
+  */
   public static void printResult(int sum, double average, char grade) {
     System.out.println("\nTotal Score: " + sum);
     System.out.println("Average Score: " + average);
