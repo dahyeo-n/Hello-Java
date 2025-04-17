@@ -26,8 +26,8 @@ public class RspGameVer2 {
       int computerItem = randomNumber();
 
       System.out.println();
-      printItems("player", playerItem);
-      printItems("computer", computerItem);
+      printItems("Player", playerItem);
+      printItems("Computer", computerItem);
 
       int numberOfWins = printGameResult(playerItem, computerItem);
       printOdds(numberOfWins, round);
