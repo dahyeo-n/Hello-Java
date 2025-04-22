@@ -50,7 +50,7 @@ public class ClassEx01 {
   public static Score inputScore() {
     Score score = new Score();
 
-    scanner.nextLine();
+    scanner.nextLine(); // buffer 제거
 
     System.out.print("Input score subject >> ");
     score.subject = scanner.nextLine();
