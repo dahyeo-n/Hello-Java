@@ -214,43 +214,16 @@ public class StudentView {
   }
 
   public void updateName(Student student) {
-    Scanner scanner = ScannerInputStream.getInstance();
-
-    System.out.print("Input student's name (without spaces) >> ");
-    String name = scanner.next();
-
-    student.setName(name);
-
-    // 변경된 student 정보 저장 (save)
-    int isSaved = studentService.save(student);
-
-    if (isSaved == 1) {
-      return;
-    } else if (isSaved == 0) {
-      System.out.println("An unknown error occurred.");
-    }
+    
   }
 
   public void updateGrade(Student student, String name) {
     // 같은 학년이든 다른 학년이든 전부 재입력 받음 (모든 점수, 과목명)
-    int grade = inputGrade(name, 1, 3);
-    student.setGrade(grade);
+    
   }
 
   public void updateScore(Student student) {
-    Scanner scanner = ScannerInputStream.getInstance();
-
-    int studentScoreLength = student.getScoresLength();
-
-    for (int i = 0; i < studentScoreLength; i++) {
-      scanner.nextLine();
-
-      System.out.print("\n[" + (i + 1) + "/" + studentScoreLength + "] Input score name >> ");
-      String subject = scanner.nextLine();
-
-      int score = inputScore(subject, 0, 100);
-      student.setScore(i, subject, score);
-    }
+    
   }
 
   private void printStudent(Student student) {
