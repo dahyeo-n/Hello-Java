@@ -9,7 +9,7 @@ import view.utils.ScannerInputStream;
 public class StudentView {
 
   private final StudentService studentService = new StudentService();
-  
+
   public void start() {
     while (true) {
       this.printGuideLine();
@@ -44,6 +44,7 @@ public class StudentView {
     System.out.println("5. Exit program");
   }
 
+  // ✨ 재사용할 수 있도록 분리하는 게 좋음 (객체 지향)
   private void inputStudent() {
     Scanner scanner = ScannerInputStream.getInstance();
 
@@ -145,7 +146,7 @@ public class StudentView {
     int index = scanner.nextInt() - 1;
     System.out.println();
 
-    // 2) 해당 인덱스의 학생이 존재하는지 확인
+    // 해당 인덱스의 학생이 존재하는지 확인
     if (!studentService.isExist(index)) {
       System.out.println("No students are registered in the index.");
       return;
@@ -155,6 +156,7 @@ public class StudentView {
     Student student = studentService.findByIndex(index);
     this.printStudent(student);
 
+    // NOTE: studentService의 업데이트 로직이 빠져있음
     // 수정할 field 선택 후 처리
     while (true) {
       System.out.print("\nWhat information would you like to change? (name: 1, grade: 2, score of subject: 3) >> ");
@@ -166,6 +168,7 @@ public class StudentView {
           System.out.print("\nInput name to update (without spaces) >> ");
           String newName = scanner.next();
           student.setName(newName);
+          // NOTE: studentService.newName(newName);
           break;
 
         case 2:
@@ -184,7 +187,7 @@ public class StudentView {
           break;
 
         case 3:
-          // 각 과목명에 따른 점수 재입력 받음. 안 바꾼다고 하면 다음 과목으로 넘어감
+          // 각 과목명에 따른 점수 재입력 받음
           // updateScore(student);
           for (int i = 0; i < student.getScoresLength(); i++) {
             String subject = student.getScoreSubject(i);
@@ -192,6 +195,7 @@ public class StudentView {
             String answer = scanner.next();
             System.out.println();
 
+            // 안 바꾼다고 하면 다음 과목으로 넘어감
             if (answer.equals("n"))
               continue;
 
@@ -211,19 +215,6 @@ public class StudentView {
 
       break;
     }
-  }
-
-  public void updateName(Student student) {
-    
-  }
-
-  public void updateGrade(Student student, String name) {
-    // 같은 학년이든 다른 학년이든 전부 재입력 받음 (모든 점수, 과목명)
-    
-  }
-
-  public void updateScore(Student student) {
-    
   }
 
   private void printStudent(Student student) {

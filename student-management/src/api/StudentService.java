@@ -15,6 +15,18 @@ public class StudentService {
     return studentRepository.findByIndex(index);
   }
 
+  public Student[] updateName(Student student) {
+    return studentRepository.updateName(student);
+  }
+
+  public Student[] updateGradeAndSubject() {
+    return studentRepository.updateGradeAndSubject(null, 0, null);
+  }
+
+  public Student[] updateScore() {
+    return studentRepository.updateScore(null)
+  }
+
   public int save(Student student) {
     return studentRepository.save(student);
   }
