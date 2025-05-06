@@ -156,7 +156,11 @@ public class StudentView {
     Student student = studentService.findByIndex(index);
     this.printStudent(student);
 
-    // NOTE: studentService의 업데이트 로직이 빠져있음
+    String newName = null;
+    // int newGrade = -1;
+    // String newSubject = null;
+    // int newScore = -1;
+
     // 수정할 field 선택 후 처리
     while (true) {
       System.out.print("\nWhat information would you like to change? (name: 1, grade: 2, score of subject: 3) >> ");
@@ -164,17 +168,13 @@ public class StudentView {
 
       switch (choseNumber) {
         case 1:
-          // 각 method 실행: updateName (해당 학생의 이름 수정)
           System.out.print("\nInput name to update (without spaces) >> ");
-          String newName = scanner.next();
-          student.setName(newName);
-          // NOTE: studentService.newName(newName);
+          newName = scanner.next();
           break;
 
         case 2:
-          // updateGrade(student, name);
           int newGrade = inputGrade(student.getName(), 1, 3);
-          student.setGrade(newGrade);
+          student.setGrade(newGrade); // NOTE: 직접 업데이트 로직 수정
 
           // 기존 과목 수만큼 새로 입력
           for (int i = 0; i < student.getScoresLength(); i++) {
@@ -182,13 +182,12 @@ public class StudentView {
             System.out.print("\n[" + (i + 1) + "/" + student.getScoresLength() + "] Input subject name >> ");
             String subject = scanner.nextLine();
             int score = inputScore(subject, 0, 100);
-            student.setScore(i, subject, score);
+            student.setScore(i, subject, score); // NOTE: 직접 업데이트 로직 수정
           }
           break;
 
         case 3:
-          // 각 과목명에 따른 점수 재입력 받음
-          // updateScore(student);
+          // 과목 점수만 update
           for (int i = 0; i < student.getScoresLength(); i++) {
             String subject = student.getScoreSubject(i);
             System.out.print("\n\"" + subject + "\" Do you update student scores? (y/n) >> ");
@@ -201,7 +200,9 @@ public class StudentView {
 
             int score = inputScore(subject, 0, 100);
             student.setScore(i, subject, score);
+            // studentService.updateStudent(student, null, score);
           }
+
           break;
 
         default:
@@ -209,10 +210,12 @@ public class StudentView {
           continue;
       }
 
+      // NOTE: 이름 or 학년(및 과목) 업데이트인 경우 (수정 필요. 지금 name만 변경 중)
+      studentService.updateStudent(student, newName, -1);
+
       System.out.println("\n✅ Student information has been updated.");
       System.out.println("\n--- Updated student's information ---\n");
-      this.printStudent(student); // 저장 결과 보여줘야 함
-
+      this.printStudent(student); // 저장 결과 보여줌
       break;
     }
   }

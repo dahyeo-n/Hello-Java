@@ -15,16 +15,8 @@ public class StudentService {
     return studentRepository.findByIndex(index);
   }
 
-  public void updateName(Student student, String newName) {
-    studentRepository.updateName(student, newName);
-  }
-
-  public void updateGradeAndSubject(Student student, int newGrade, String newSubject) {
-    studentRepository.updateGradeAndSubject(student, newGrade, newSubject);
-  }
-
-  public void updateScore(Student student, int newScore) {
-    studentRepository.updateScoresOnly(student, newScore);
+  public void updateStudent(Student student, String newName, int newScore) {
+    studentRepository.updateStudent(student, newName, newScore);
   }
 
   public int save(Student student) {
@@ -34,5 +26,5 @@ public class StudentService {
   public boolean isExist(int index) {
     return studentRepository.isExist(index);
   }
-  
+
 }
