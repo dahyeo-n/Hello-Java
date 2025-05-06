@@ -34,7 +34,7 @@ public class StudentView {
       System.out.println();
     }
   }
-  
+
   private void printGuideLine() {
     System.out.println("--- Student Management Program GuideLine ---\n");
     System.out.println("1. Input student");
@@ -139,6 +139,12 @@ public class StudentView {
    */
 
   private void updateStudentByIndex() {
+    // 등록된 학생이 1명도 없으면(0번째 인덱스의 학생) 해당 method 실행 안 함
+    if (!studentService.isExist(0)) {
+      System.out.println("❌ No students are registered.");
+      return;
+    }
+
     this.printAllStudents();
 
     Scanner scanner = ScannerInputStream.getInstance();
@@ -148,7 +154,7 @@ public class StudentView {
 
     // 해당 인덱스의 학생이 존재하는지 확인
     if (!studentService.isExist(index)) {
-      System.out.println("No students are registered in the index.");
+      System.out.println("❌ No students are registered in the index.");
       return;
     }
 
@@ -242,7 +248,7 @@ public class StudentView {
     while (true) {
       System.out.print("Input " + name + "'s grade (" + minGrade + "~" + maxGrade + ") >> ");
       grade = scanner.nextInt();
-      
+
       if (grade >= minGrade && grade <= maxGrade) {
         System.out.println(name + "'s grade is '" + grade + "'.");
         return grade;
@@ -259,7 +265,7 @@ public class StudentView {
     while (true) {
       System.out.print(subject + " score (" + minScore + "~" + maxScore + ") >> ");
       score = scanner.nextInt();
-      
+
       if (score >= minScore && score <= maxScore) {
         return score;
       }
