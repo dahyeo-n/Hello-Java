@@ -46,7 +46,7 @@ public class StudentRepository {
     }
   }
 
-  public void updateScore(Student student, int newScore) {
+  public void updateScoresOnly(Student student, int newScore) {
     for (int i = 0; i < student.getScoresLength(); i++) {
       String subject = student.getScoreSubject(i);
       student.setScore(i, subject, newScore);

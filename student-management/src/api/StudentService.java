@@ -15,16 +15,16 @@ public class StudentService {
     return studentRepository.findByIndex(index);
   }
 
-  public Student[] updateName(Student student) {
-    return studentRepository.updateName(student);
+  public void updateName(Student student, String newName) {
+    studentRepository.updateName(student, newName);
   }
 
-  public Student[] updateGradeAndSubject() {
-    return studentRepository.updateGradeAndSubject(null, 0, null);
+  public void updateGradeAndSubject(Student student, int newGrade, String newSubject) {
+    studentRepository.updateGradeAndSubject(student, newGrade, newSubject);
   }
 
-  public Student[] updateScore() {
-    return studentRepository.updateScore(null)
+  public void updateScore(Student student, int newScore) {
+    studentRepository.updateScoresOnly(student, newScore);
   }
 
   public int save(Student student) {
