@@ -15,8 +15,20 @@ public class StudentService {
     return studentRepository.findByIndex(index);
   }
 
-  public void updateStudent(Student student, String newName, int newScore) {
-    studentRepository.updateStudent(student, newName, newScore);
+  // public void updateStudent(Student student, String newName, int newScore) {
+  //   studentRepository.updateStudent(student, newName, newScore);
+  // }
+
+  public void updateStudentName(Student student, String newName) {
+    studentRepository.updateStudentName(student, newName);
+  }
+
+  public void updateStudentGradeAndSubjects(Student student, int grade) {
+    studentRepository.updateStudentGradeAndSubjects(student, grade);
+  }
+
+  public void updateStudentSubjectScore(Student student, int index, String subject, int score) {
+    studentRepository.updateStudentSubjectScore(student, index, subject, score);
   }
 
   public int save(Student student) {

@@ -33,25 +33,39 @@ public class StudentRepository {
     return 0; // 저장 실패하면 '0' 반환
   }
 
-  public void updateStudent(Student student, String newName, int newScore) {
-    // updateName
+  // public void updateStudent(Student student, String newName, int newScore) {
+  //   // updateName
+  //   if (newName != null) {
+  //     student.setName(newName);
+  //   }
+
+  //   // updateGradeAndSubject
+  //   // int 타입이라 null 체크를 못 해서 -1로 체크로 대체
+  //   // if (newGrade != -1) {
+  //   //   student.setGrade(newGrade);
+  //   // }
+
+  //   // updateScoresOnly
+  //   if (newScore != -1) {
+  //     for (int i = 0; i < student.getScoresLength(); i++) {
+  //       String subject = student.getScoreSubject(i);
+  //       student.setScore(i, subject, newScore);
+  //     }
+  //   }
+  // }
+
+  public void updateStudentName(Student student, String newName) {
     if (newName != null) {
       student.setName(newName);
     }
+  }
 
-    // updateGradeAndSubject
-    // int 타입이라 null 체크를 못 해서 -1로 체크로 대체
-    // if (newGrade != -1) {
-    //   student.setGrade(newGrade);
-    // }
+  public void updateStudentGradeAndSubjects(Student student, int grade) {
+    student.setGrade(grade);
+  }
 
-    // updateScoresOnly
-    if (newScore != -1) {
-      for (int i = 0; i < student.getScoresLength(); i++) {
-        String subject = student.getScoreSubject(i);
-        student.setScore(i, subject, newScore);
-      }
-    }
+  public void updateStudentSubjectScore(Student student, int index, String subject, int score) {
+    student.setScore(index, subject, score);
   }
 
   public boolean isExist(int index) {

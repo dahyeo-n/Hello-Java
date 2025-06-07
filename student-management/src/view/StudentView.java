@@ -163,9 +163,6 @@ public class StudentView {
     this.printStudent(student);
 
     String newName = null;
-    // int newGrade = -1;
-    // String newSubject = null;
-    // int newScore = -1;
 
     // 수정할 field 선택 후 처리
     while (true) {
@@ -176,11 +173,12 @@ public class StudentView {
         case 1:
           System.out.print("\nInput name to update (without spaces) >> ");
           newName = scanner.next();
+          studentService.updateStudentName(student, newName);
           break;
 
         case 2:
           int newGrade = inputGrade(student.getName(), 1, 3);
-          student.setGrade(newGrade); // NOTE: 직접 업데이트 로직 수정
+          studentService.updateStudentGradeAndSubjects(student, newGrade);
 
           // 기존 과목 수만큼 새로 입력
           for (int i = 0; i < student.getScoresLength(); i++) {
@@ -188,7 +186,7 @@ public class StudentView {
             System.out.print("\n[" + (i + 1) + "/" + student.getScoresLength() + "] Input subject name >> ");
             String subject = scanner.nextLine();
             int score = inputScore(subject, 0, 100);
-            student.setScore(i, subject, score); // NOTE: 직접 업데이트 로직 수정
+            studentService.updateStudentSubjectScore(student, i, subject, score);
           }
           break;
 
@@ -205,19 +203,14 @@ public class StudentView {
               continue;
 
             int score = inputScore(subject, 0, 100);
-            student.setScore(i, subject, score);
-            // studentService.updateStudent(student, null, score);
+            studentService.updateStudentSubjectScore(student, i, subject, score);
           }
-
           break;
 
         default:
           System.out.println("You input wrong number.");
           continue;
       }
-
-      // NOTE: 이름 or 학년(및 과목) 업데이트인 경우 (수정 필요. 지금 name만 변경 중)
-      studentService.updateStudent(student, newName, -1);
 
       System.out.println("\n✅ Student information has been updated.");
       System.out.println("\n--- Updated student's information ---\n");
