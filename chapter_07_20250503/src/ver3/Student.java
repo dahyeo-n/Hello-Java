@@ -1,7 +1,7 @@
-package ver1;
+package ver3;
 
-// extends 키워드를 통해서 상속함
-public class Student extends Person {
+// class 상속은 1개만 되는데, interface는 여러 개도 상속 가능 (주의 문구는 뜨긴 함)
+public class Student extends Person implements StudentInterface, PersonInterface {
 
   private int grade;
   private Score[] scores;
@@ -22,7 +22,7 @@ public class Student extends Person {
   public Student() { }
 
   public Student(String name, int age, String phoneNumber) {
-    super(name, age, phoneNumber); // 부모 생성자 호출 (부모를 참조할 떈 'super'를 씀 / 'this'는 자기 자신 생성자)
+    super(name, age, phoneNumber); // 부모 생성자 호출 ('this'는 자기 자신 생성자)
     this.setGrade();
   }
 
@@ -113,12 +113,26 @@ public class Student extends Person {
   private void setRank() {
     switch ((int) this.average / 10) {
       case 10:
-      case 9: this.rank = 'A'; break;
-      case 8: this.rank = 'B'; break;
-      case 7: this.rank = 'C'; break;
-      case 6: this.rank = 'D'; break;
-      default: this.rank = 'F';
+      case 9:
+        this.rank = 'A';
+        break;
+      case 8:
+        this.rank = 'B';
+        break;
+      case 7:
+        this.rank = 'C';
+        break;
+      case 6:
+        this.rank = 'D';
+        break;
+      default:
+        this.rank = 'F';
     }
+  }
+
+  @Override
+  public void print() {
+    System.out.println("학생 정보 출력");
   }
 
 }

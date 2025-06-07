@@ -1,8 +1,8 @@
-package ver1;
+package ver2;
 
-public class Person {
+// 'abstract'를 붙이면 추상 클래스
+abstract public class Person {
 
-  // protected: (접근제어자) 나뿐만 아니라 자식도 쓸 수 있도록 함
   protected String name;
   protected int age;
   protected String phoneNumber;
@@ -38,5 +38,7 @@ public class Person {
   public void setPhoneNumber(String phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+
+  abstract public void print();
 
 }
