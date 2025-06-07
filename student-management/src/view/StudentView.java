@@ -41,6 +41,7 @@ public class StudentView {
     System.out.println("2. Update student by student's index");
     System.out.println("3. Print student by student's index");
     System.out.println("4. Print all students");
+    // NOTE: 🧩 삭제 기능 추가
     System.out.println("5. Exit program");
   }
 

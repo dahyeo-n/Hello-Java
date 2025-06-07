@@ -25,7 +25,7 @@ public class Student extends Person {
     this.setGrade();
   }
 
-  @Override // NOTE: [새로운 개념] 
+  @Override
   public void setAge(int age) {
     super.setAge(age);
     this.setGrade();

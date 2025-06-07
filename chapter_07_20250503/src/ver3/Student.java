@@ -26,8 +26,9 @@ public class Student extends Person implements StudentInterface, PersonInterface
     this.setGrade();
   }
 
-  @Override // NOTE: [새로운 개념] 
-  public void setAge(int age) {
+  // 부모 클래스의 메소드를 자식 클래스에서 재정의하면 자식 인스턴스를 생성할 때 재정의한 메소드가 사용됨
+  @Override
+    public void setAge(int age) {
     super.setAge(age);
     this.setGrade();
   }

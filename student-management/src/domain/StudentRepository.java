@@ -2,6 +2,9 @@ package domain;
 
 public class StudentRepository {
 
+  // NOTE: 🧩 Score[], Student[] 모두 배열 형태로 돼있는데, LinkedList or ArrayList 중에 택1하여 리팩토링
+  // NOTE: 🧩 삭제 구현
+
   // 상태 관리는 'static'으로 안 함
   private Student[] students = new Student[10];
 
