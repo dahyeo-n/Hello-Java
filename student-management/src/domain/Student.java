@@ -1,12 +1,15 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
 
   // field: 직접 접근하지 않고 method로 접근해야 함 ('private'가 기본)
   // private String studentId; // 고유 번호가 있음
   private String name;
   private int grade;
-  private Score[] scores;
+  private List<Score> scores;
   private int sumScore;
   private double averageScore;
   private char rank;
@@ -42,40 +45,48 @@ public class Student {
   }
 
   public String getScoreSubject(int index) {
-    return this.scores[index].getSubject(); // 특정 인덱스의 과목명을 가져옴
+    return this.scores.get(index).getSubject(); // 특정 인덱스의 과목명을 가져옴
   }
 
   public int getScoreValue(int index) {
-    return this.scores[index].getValue(); // 특정 인덱스의 점수를 가져옴
+    return this.scores.get(index).getValue(); // 특정 인덱스의 점수를 가져옴
   }
 
   public void setScoreValue(int index, int value) {
-    this.scores[index] = this.scores[index].updateValue(value);
+    this.scores.set(index, this.scores.get(index).updateValue(value));
     this.setSumScore();
   }
 
   public void setScore(int index, String subject, int value) {
-    this.scores[index] = new Score(subject, value);
+    this.scores.set(index, new Score(subject, value));
     this.setSumScore();
   }
 
   public int getScoresLength() {
-    return this.scores.length;
+    return this.scores.size();
   }
 
   private void setScoresLength() {
+    this.scores = new ArrayList<>();
+    int size;
+    
     switch (this.grade) {
       case 1:
-        this.scores = new Score[3];
+        size = 3;
         break;
       case 2:
-        this.scores = new Score[6];
+        size = 6;
         break;
       case 3:
-        this.scores = new Score[9];
+        size = 9;
         break;
       default:
-        this.scores = new Score[3];
+        size = 3;
+    }
+
+    // 빈 Score 객체로 초기화
+    for (int i = 0; i < size; i++) {
+      this.scores.add(null);
     }
   }
 
@@ -100,7 +111,7 @@ public class Student {
   }
 
   private void setAverageScore() {
-    this.averageScore = (double) this.sumScore / this.scores.length;
+    this.averageScore = (double) this.sumScore / this.scores.size();
     this.setRank();
   }
 

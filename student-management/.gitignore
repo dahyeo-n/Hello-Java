@@ -1,0 +1,28 @@
+# Java 컴파일된 파일들
+*.class
+bin/
+build/
+target/
+
+# IDE 관련 파일들
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# OS 관련 파일들
+.DS_Store
+Thumbs.db
+
+# 로그 파일들
+*.log
+
+# 패키지 파일들
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar 

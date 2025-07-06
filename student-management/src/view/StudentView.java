@@ -17,17 +17,18 @@ public class StudentView {
       System.out.println();
 
       Scanner scanner = ScannerInputStream.getInstance();
-      System.out.print("Input number (1~5) >> ");
+      System.out.print("Input number (1~6) >> ");
 
       int programNumber = scanner.nextInt();
-      System.out.println();  
+      System.out.println();
 
       switch (programNumber) {
         case 1: this.inputStudent(); break;
         case 2: this.updateStudentByIndex(); break;
         case 3: this.printStudentByIndex(); break;
         case 4: this.printAllStudents(); break;
-        case 5: this.exitProgram(); return;
+        case 5: this.deleteStudentByIndex(); break;
+        case 6: this.exitProgram(); return;
         default: System.out.println("You input wrong number.");
       }
 
@@ -41,8 +42,8 @@ public class StudentView {
     System.out.println("2. Update student by student's index");
     System.out.println("3. Print student by student's index");
     System.out.println("4. Print all students");
-    // NOTE: 🧩 삭제 기능 추가
-    System.out.println("5. Exit program");
+    System.out.println("5. Delete student by student's index");
+    System.out.println("6. Exit program");
   }
 
   // ✨ 재사용할 수 있도록 분리하는 게 좋음 (객체 지향)
@@ -111,7 +112,7 @@ public class StudentView {
     Student[] students = studentService.findAll();
 
     if (students.length == 0) {
-      System.out.println("\nNo students are registered.");
+      System.out.println("\n❌ No students are registered.");
       return;
     }
 
@@ -140,8 +141,8 @@ public class StudentView {
    */
 
   private void updateStudentByIndex() {
-    // 등록된 학생이 1명도 없으면(0번째 인덱스의 학생) 해당 method 실행 안 함
-    if (!studentService.isExist(0)) {
+    // 등록된 학생이 1명도 없으면 해당 method 실행 안 함
+    if (studentService.getStudentCount() == 0) {
       System.out.println("❌ No students are registered.");
       return;
     }
@@ -265,6 +266,49 @@ public class StudentView {
       }
 
       System.out.println("You input wrong score.");
+    }
+  }
+
+  private void deleteStudentByIndex() {
+    // 등록된 학생이 1명도 없으면 해당 method 실행 안 함
+    if (studentService.getStudentCount() == 0) {
+      System.out.println("❌ No students are registered.");
+      return;
+    }
+
+    this.printAllStudents();
+
+    Scanner scanner = ScannerInputStream.getInstance();
+    System.out.print("\nEnter the index of the student you want to delete >> ");
+    
+    int index = scanner.nextInt() - 1;
+    System.out.println();
+
+    // 해당 인덱스의 학생이 존재하는지 확인
+    if (!studentService.isExist(index)) {
+      System.out.println("❌ No students are registered in the index.");
+      return;
+    }
+
+    // 삭제할 학생의 정보 출력
+    Student student = studentService.findByIndex(index);
+    System.out.println("--- Student to be deleted ---\n");
+    this.printStudent(student);
+
+    // 삭제 확인
+    System.out.print("\nAre you sure you want to delete this student? (y/n) >> ");
+    String confirmation = scanner.next();
+
+    if (confirmation.equals("y")) {
+      boolean isDeleted = studentService.deleteByIndex(index);
+      
+      if (isDeleted) {
+        System.out.println("\n✅ Student has been successfully deleted.");
+      } else {
+        System.out.println("\n❌ Failed to delete student. Please try again.");
+      }
+    } else {
+      System.out.println("\n🔄 Deletion cancelled.");
     }
   }
 

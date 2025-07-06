@@ -15,10 +15,6 @@ public class StudentService {
     return studentRepository.findByIndex(index);
   }
 
-  // public void updateStudent(Student student, String newName, int newScore) {
-  //   studentRepository.updateStudent(student, newName, newScore);
-  // }
-
   public void updateStudentName(Student student, String newName) {
     studentRepository.updateStudentName(student, newName);
   }
@@ -35,8 +31,16 @@ public class StudentService {
     return studentRepository.save(student);
   }
 
+  public boolean deleteByIndex(int index) {
+    return studentRepository.deleteByIndex(index);
+  }
+
   public boolean isExist(int index) {
     return studentRepository.isExist(index);
+  }
+
+  public int getStudentCount() {
+    return studentRepository.getStudentCount();
   }
 
 }

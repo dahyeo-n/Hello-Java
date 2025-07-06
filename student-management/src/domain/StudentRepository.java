@@ -1,61 +1,46 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StudentRepository {
 
-  // NOTE: 🧩 Score[], Student[] 모두 배열 형태로 돼있는데, LinkedList or ArrayList 중에 택1하여 리팩토링
-  // NOTE: 🧩 삭제 구현
-
   // 상태 관리는 'static'으로 안 함
-  private Student[] students = new Student[10];
+  private List<Student> students = new ArrayList<>();
 
   public Student[] findAll() {
-    Student[] students = new Student[this.checkStudentsLength()];
-
-    for (int i = 0; i < students.length; i++) {
-      students[i] = this.students[i];
+    Student[] result = new Student[students.size()];
+    for (int i = 0; i < students.size(); i++) {
+      result[i] = students.get(i);
     }
-
-    return students;
+    return result;
   }
 
   public Student findByIndex(int index) {
-    if (index < 0 || index > this.students.length)
+    if (index < 0 || index >= this.students.size())
       return null;
 
-    return this.students[index];
+    return this.students.get(index);
   }
 
   public int save(Student student) {
-    for (int i = 0; i < students.length; i++) {
-      if (this.students[i] == null) {
-        this.students[i] = student;
-        return 1; // 저장 성공하면 '1' 반환
-      }
+    // 기존 코드처럼 빈 자리(null)을 찾을 필요 없음. 맨끝에 추가하면 돼서 for문 제거
+    if (student == null) {
+      return 0; // 저장 실패하면 '0' 반환
     }
-
-    return 0; // 저장 실패하면 '0' 반환
+    
+    students.add(student);
+    return 1; // 저장 성공하면 '1' 반환
   }
 
-  // public void updateStudent(Student student, String newName, int newScore) {
-  //   // updateName
-  //   if (newName != null) {
-  //     student.setName(newName);
-  //   }
-
-  //   // updateGradeAndSubject
-  //   // int 타입이라 null 체크를 못 해서 -1로 체크로 대체
-  //   // if (newGrade != -1) {
-  //   //   student.setGrade(newGrade);
-  //   // }
-
-  //   // updateScoresOnly
-  //   if (newScore != -1) {
-  //     for (int i = 0; i < student.getScoresLength(); i++) {
-  //       String subject = student.getScoreSubject(i);
-  //       student.setScore(i, subject, newScore);
-  //     }
-  //   }
-  // }
+  public boolean deleteByIndex(int index) {
+    if (index < 0 || index >= students.size()) {
+      return false; // 삭제 실패
+    }
+    
+    students.remove(index);
+    return true; // 삭제 성공
+  }
 
   public void updateStudentName(Student student, String newName) {
     if (newName != null) {
@@ -72,20 +57,11 @@ public class StudentRepository {
   }
 
   public boolean isExist(int index) {
-    return index >= 0 && index <= this.students.length && students[index] != null;
+    return index >= 0 && index < this.students.size() && this.students.get(index) != null;
   }
 
-  private int checkStudentsLength() {
-    int studentLength = 0;
-
-    for (Student e: this.students) {
-      if (e == null)
-        return studentLength;
-
-      studentLength++;
-    }
-
-    return studentLength;
+  public int getStudentCount() {
+    return students.size();
   }
 
 }
