@@ -1,0 +1,28 @@
+# <과제>
+# (1) Docker, MySQL으로 해온 과정 설명 (docker 디렉토리 결과만 띄워놓고 설명)
+# => 도커가 뭔지 -> 도커를 이용해서 도커 컴포즈 만듦 -> 도커로 SQL Init 만듦
+# [🌟현업🌟] 프론트엔드에서 빌드하는 과정을 이미지화해서 docker-compose 만든 걸로 할 수도 있음
+# (2) MySQL로 데이터를 CRUD 시나리오를 기반으로 설명 (보여줌)
+
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.42
+    container_name: study_community_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: study_community # Schema
+      MYSQL_USER: study_user
+      MYSQL_PASSWORD: 1234
+    ports:
+      - '23306:3306' # MySQL은 '3306'가 기본 Port 번호, Docker는 '23306'이라는 Port 번호로 접근
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  mysql_data:
